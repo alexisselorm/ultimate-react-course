@@ -72,14 +72,16 @@ function Menu(){
     <main className="menu">
     <h2>Our menu</h2>
     {
-      pizzaData.length >0 &&(
+      pizzaData.length >0 ?(
+      <>
+       <p>Authentic Italian Cuisine. 6 creative dishes to choose from. All from our stone oven. all organic, all delicious.</p>
         <ul className="pizzas">
-
         {pizzaData.map(pizza=>(
-          <Pizza key={pizza.name} name={pizza.name} ingredient={pizza.ingredients} photoName={pizza.photoName} price={pizza.price}/>
+          <Pizza key={pizza.name} name={pizza.name} ingredient={pizza.ingredients} photoName={pizza.photoName} price={pizza.price} soldOut={pizza.soldOut}/>
         ))}
         </ul>
-      )
+      </>
+      ) : <p>Nothing to show you here right now</p>
     }
 
   
@@ -94,12 +96,20 @@ function Footer(){
   console.log(isOpen);
 
   return (
-    <footer className="footer"> {isOpen && (
-      <div className="order">
+    <footer className="footer"> {isOpen ? (
+      <Order openHour={openHour} closeHour={closeHour}/>
+   ) : <p>We're happing to welcome you between {openHour}:00  and {closeHour}:00</p>
+}
+</footer>
+  )
+}
+
+function Order({closeHour}){
+  return (
+    <div className="order">
     <p>We're open until {closeHour}:00. Come visit us or order online</p>
     <button className="btn">Order Now</button>
       </div>
-  )}</footer>
   )
 }
 
@@ -107,12 +117,12 @@ function Footer(){
 function Pizza(props){
  return (
 
-  <div className="pizza">
+  <div className={`pizza ${props.soldOut? "sold-out":""}`}>
   <img src={props.photoName} alt={props.name} />
   <div>
   <h3>{props.name}</h3>
   <p>{props.ingredient}</p>
-  <span>{props.price}</span>
+  <span>{props.soldOut ? "SOLD OUT" :props.price}</span>
   </div>
  </div>
 
