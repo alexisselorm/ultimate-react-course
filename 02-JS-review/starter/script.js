@@ -142,3 +142,16 @@ function getBooks() {
 function getBook(id) {
   return data.find((d) => d.id === id);
 }
+
+let {author,title,genres} = getBook(3);
+
+let [scifi,...others]=genres
+
+let books = getBooks();
+console.log(books.length); 
+
+const pagesallbooks = books.reduce((acc,book)=>(
+  acc+book.pages
+),0)
+
+console.log(pagesallbooks);

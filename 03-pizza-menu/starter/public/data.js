@@ -42,3 +42,11 @@ const pizzaData = [
     soldOut: false,
   },
 ];
+
+export const getPizzas =()=>{
+  return pizzaData;
+}
+
+// export const getPizza=(id)=>{
+//   return pizzaData.find(pizza=>pizza.)
+// }
