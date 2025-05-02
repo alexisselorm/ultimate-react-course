@@ -13,45 +13,33 @@ function App() {
   const date = new Date()
   date.setDate(date.getDate()+count)
 
+  function handleReset(){
+    setStep(1)
+    setCount(0)
+  }
+
 
   return (
     <>
       <div>
-      <button onClick={()=>setStep((s)=>s-1)}>-</button>
-      <p>Step: {step}</p>
-      <button onClick={()=>setStep((s)=>s+1)}>+</button>
+      <input type='range' max="10" min="0" value={step} onChange={(e)=>setStep(+e.target.value)}/><span>{step}</span>
       </div>
       <div>
       <button onClick={()=>setCount((s)=>s-step)}>-</button>
-      <p>Count: {count}</p>
+      <input type='text' value={count} onChange={ (e)=>setCount(+e.target.value)}/>
       <button onClick={()=>setCount((s)=>s+step)}>+</button>
       </div>
       <p>{ count ==0 ? "Today is" 
       : count > 0 ? `${count} days from today is `:
        `${Math.abs(count)} days ago was`}</p>
        <p>{date.toDateString()}</p>
+       {
+        (count > 0 || step >1) && <button onClick={handleReset}>Reset</button>
+       }
+       
     </>
   )
 }
-
-// function Step(){
-
-
-//   return (
-//     <div>
-  
-//     </div>
-//   )
-// }
-
-// function Count(){
-
-//   return (
-//     <div>
-      
-//     </div>
-//   )
-// }
 
 
 export default App
