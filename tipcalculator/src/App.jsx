@@ -23,7 +23,7 @@ function App() {
    <Service service={service} setService={setService} />
     <FriendService friendService={friendService} setFriendService={setFriendService} />
     <Total bill={bill} service={service} friendService={friendService} />
-    <Reset onReset={handleReset} />
+    {bill && <Reset onReset={handleReset} />}
     </>
   )
 }
