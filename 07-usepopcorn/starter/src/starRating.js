@@ -22,9 +22,14 @@ StarRating.propTypes={
   onSetRating:PropTypes.func
 }
 
-export default function StarRating({maxRating=5,color="#fcc419",size=48,defaultRating=0}){
+export default function StarRating({maxRating=5,color="#fcc419",size=48,defaultRating=0, onSetRating,}){
   const [rating,setRating]=useState(defaultRating);
   const [tempRating, setTemprating]=useState(0);
+
+   function handleRating(rating) {
+    setRating(rating);
+    onSetRating(rating);
+  }
 
   const textStyle={
     lineHeight:"1",
@@ -37,7 +42,7 @@ export default function StarRating({maxRating=5,color="#fcc419",size=48,defaultR
   return (
     <div style={containerStyle}>
       <div style={starsContainerStyle}>{Array.from({length:maxRating},(_,i)=>(
-        <Star color={color} size={size} full={tempRating ? tempRating>=i+1 : rating>=i+1} onRate={()=>setRating(i+1)} onHoverIn={()=>setTemprating(i+1)} onHoverOut={()=>setTemprating(0)}  key={i} />
+        <Star color={color} size={size} full={tempRating ? tempRating>=i+1 : rating>=i+1} onRate={() => handleRating(i + 1)} onHoverIn={()=>setTemprating(i+1)} onHoverOut={()=>setTemprating(0)}  key={i} />
         ))}
         </div>
       <p style={textStyle}>{tempRating || rating || ''}</p>
