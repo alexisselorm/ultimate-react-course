@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import StarRating from './starRating'
 import useMovies from "./useMovies";
+import useLocalStorageState from "./useLocalStorageState";
+import useKey from "./useKey";
 
 
 const average = (arr) =>
@@ -35,23 +37,13 @@ function Search({query,setQuery}){
 
   const inputElement = useRef(null);
 
-  useEffect(() => {
 
-    function callback(e) {
-
-      if (document.activeElement===inputElement.current) return;
-
-      if (e.code==="Slash") {
+  useKey('Slash',function(){
+        if (document.activeElement===inputElement.current) return;
         inputElement.current.focus();
         setQuery("")
-      }
-    }
 
-    document.addEventListener('keydown',callback)
-
-    return ()=> document.removeEventListener('keydown',callback)
-
-  }, [setQuery]);
+  })
 
 return (
   <input
@@ -74,8 +66,8 @@ function Main({children}){
 }
 
 export default function App() {
-  const [watched, setWatched] = useState(()=>JSON.parse(localStorage.getItem('watched')))
-  // const [watched, setWatched] = useState([])
+  const [watched, setWatched] = useLocalStorageState([],'watched')
+  // const [watched, setWatched] = useState(()=>JSON.parse(localStorage.getItem('watched')))
 
   const [query, setQuery] = useState("");
   const [selectedId, setSelectedId]=useState(null);
@@ -101,11 +93,6 @@ export default function App() {
   const {movies,isLoading,error} = useMovies(query);
 
 
-  useEffect(() => {
-    localStorage.setItem('watched',JSON.stringify(watched));
-  }, [watched]);
-
-
 
   return (
     <>
@@ -122,7 +109,7 @@ export default function App() {
      </Box>
      <Box>
       {
-        selectedId ? <MovideDetails selectedId={selectedId} onCloseMovie={handleCloseMovie} onAddWatched={handleAddWatched} watched={watched} />
+        selectedId ? <MovieDetails selectedId={selectedId} onCloseMovie={handleCloseMovie} onAddWatched={handleAddWatched} watched={watched} />
         :
         <>
         <WatchedSummary watched={watched} />
@@ -178,7 +165,7 @@ function MovieList({movies,onSelectMovie}) {
   )
 }
 
-function MovideDetails({selectedId,onCloseMovie,onAddWatched, watched}){
+function MovieDetails({selectedId,onCloseMovie,onAddWatched, watched}){
   const [movie, setMovie] = useState({});
   const [isLoading, setisLoading] = useState(false);
   const [userRating, setUserRating] = useState('');
@@ -195,16 +182,7 @@ function MovideDetails({selectedId,onCloseMovie,onAddWatched, watched}){
 
   const {Title:title,Year:year,Poster:poster,Runtime:runtime,imdbRating,Plot:plot, Released:released,Actors:actors,Director:director,Genre:genre}=movie
 
-    useEffect(() => {
-      function callback(e){
-      if (e.code==='Escape') {
-        onCloseMovie()
-      }
-    }
-    document.addEventListener('keydown',callback)
-
-    return ()=>document.removeEventListener("keydown",callback)
-  }, [onCloseMovie]);
+  useKey('Escape',onCloseMovie)
 
   function handleAdd(){
     const newWatchedMovie={
