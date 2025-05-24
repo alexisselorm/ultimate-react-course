@@ -3,10 +3,8 @@ import { useState } from 'react'
 import './App.css'
 
 
-
-
-
 function App() {
+
   const [step, setStep] = useState(1)
   const [count, setCount] = useState(0)
 
