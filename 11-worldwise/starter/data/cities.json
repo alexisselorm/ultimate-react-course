@@ -47,6 +47,54 @@
       },
       "emoji": "🇸🇪",
       "id": 98443199
+    },
+    {
+      "cityName": "London",
+      "country": "United Kingdom of Great Britain and Northern Ireland (the)",
+      "date": "2025-06-16T20:21:49.787Z",
+      "notes": "Knife boys",
+      "position": {
+        "lat": "51.5072466571743",
+        "lng": "-0.1344108581542969"
+      },
+      "emoji": "🇬🇧",
+      "id": 98443200
+    },
+    {
+      "cityName": "Hemel Hempstead",
+      "country": "United Kingdom of Great Britain and Northern Ireland (the)",
+      "date": "2025-06-16T20:23:32.997Z",
+      "notes": "BLoody hell",
+      "position": {
+        "lat": "51.813709018585094",
+        "lng": "-0.6646728515625"
+      },
+      "emoji": "🇬🇧",
+      "id": 98443201
+    },
+    {
+      "cityName": "Goteborg",
+      "country": "Sweden",
+      "date": "2025-06-16T20:25:25.612Z",
+      "notes": "Rainy place",
+      "position": {
+        "lat": "57.721752647550325",
+        "lng": "12.035522460937502"
+      },
+      "emoji": "🇸🇪",
+      "id": 98443202
+    },
+    {
+      "cityName": "Oslo",
+      "country": "Norway",
+      "date": "2025-06-16T20:25:51.995Z",
+      "notes": "Expensive",
+      "position": {
+        "lat": "59.913729826873684",
+        "lng": "10.733642578125002"
+      },
+      "emoji": "🇳🇴",
+      "id": 98443203
     }
   ]
 }
