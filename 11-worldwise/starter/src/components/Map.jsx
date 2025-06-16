@@ -6,21 +6,16 @@ import {useCities} from '../contexts/CitiesContext';
 import 'leaflet/dist/leaflet.css';
 import { useGeolocation } from '../hooks/useGeolocation';
 import Button from './Button';
+import useURLposition from '../hooks/useURLposition';
 
 
 
 function Map() {
   
   const {cities} = useCities();
-
-
-  
-  const [searchParams]=useSearchParams();
   const [mapPosition, setMapPosition]=useState([51.505, -0.09])
-  const mapLat=searchParams.get("lat")
-  const mapLng=searchParams.get("lng")
   const {error,isLoading:isLoadingPosition,position:geolocationPosition,getPosition} = useGeolocation();
-
+  const [mapLat,mapLng] = useURLposition();
 
   useEffect(() => {
     if(mapLat && mapLng) {
