@@ -1,5 +1,18 @@
 import { useState } from "react";
 
+
+function Counter({children}){
+const [count, setCount] = useState(0);
+  return (
+    <div>
+      <h1>Slow counter?!?</h1>
+      <button onClick={() => setCount((c) => c + 1)}>Increase: {count}</button>
+      {children}
+    </div>
+  );
+
+}
+
 function SlowComponent() {
   // If this is too slow on your maching, reduce the `length`
   const words = Array.from({ length: 100_000 }, () => "WORD");
@@ -15,12 +28,12 @@ function SlowComponent() {
 }
 
 export default function Test() {
-  const [count, setCount] = useState(0);
+  
   return (
     <div>
-      <h1>Slow counter?!?</h1>
-      <button onClick={() => setCount((c) => c + 1)}>Increase: {count}</button>
-      <SlowComponent />
+      <Counter>
+        <SlowComponent />
+      </Counter>
     </div>
   );
 }
