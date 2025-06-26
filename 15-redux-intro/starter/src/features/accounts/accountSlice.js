@@ -9,12 +9,12 @@ export default function accountReducer(state=initialStateAccount, action) {
     case "account/deposit":
       return {
         ...state,
-        balance: state.balance + action.payload.amount,
+        balance: state.balance + action.payload,
       };
     case "account/withdraw":
       return {
         ...state,
-        balance: state.balance - action.payload.amount,
+        balance: state.balance - action.payload,
       };
     case "account/requestLoan":
       if (state.loan > 0) {
@@ -29,10 +29,12 @@ export default function accountReducer(state=initialStateAccount, action) {
         balance: state.balance + action.payload.amount
       };
     case "account/payloan":
+      console.log(action.payload)
       return {
         ...state,
         loan: 0,
-        balance: state.loan - action.payload.amount,
+        loanPurpose:"",
+        balance: state.balance - state.loan,
       };
     default:
       return state;
@@ -40,6 +42,7 @@ export default function accountReducer(state=initialStateAccount, action) {
 }
 
 export function deposit(amount){
+  console.log(amount);
   return {
     type: "account/deposit",
     payload:  amount ,
