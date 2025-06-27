@@ -12,7 +12,7 @@ function AccountOperations() {
   const dispatch = useDispatch()
 
   function handleDeposit() {
-    dispatch(deposit(depositAmount));
+    dispatch(deposit(depositAmount,currency));
     setDepositAmount("");
   }
 

@@ -41,12 +41,16 @@ export default function accountReducer(state=initialStateAccount, action) {
   }
 }
 
-export function deposit(amount){
-  console.log(amount);
+export function deposit(amount,currency){
+  if (currency==='USD') {
   return {
     type: "account/deposit",
     payload:  amount ,
   }
+  }
+
+  
+
 }
 
 export function withdraw(amount){
