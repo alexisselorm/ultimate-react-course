@@ -2,6 +2,7 @@ import Header from "./Header";
 import CartOverview from '../features/cart/CartOverview'
 import { Outlet, useNavigation } from "react-router-dom";
 import Loader from "./Loader";
+import SearchOrder from "../features/order/SearchOrder";
 function AppLayout() {
 
   const navigation = useNavigation();
@@ -13,6 +14,7 @@ function AppLayout() {
       isLoading && <Loader/>
       }
       <Header/>
+      <SearchOrder/>
 
       <main>
         <Outlet/>
