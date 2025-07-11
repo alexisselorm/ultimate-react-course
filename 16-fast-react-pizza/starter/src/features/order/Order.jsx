@@ -13,7 +13,7 @@ import {
 function Order() {
   // Everyone can search for all orders, so for privacy reasons we're gonna gonna exclude names or address, these are only for the restaurant staff
  const order = useLoaderData()
- 
+ console.log(order);
   const {
     id,
     status,
@@ -46,7 +46,7 @@ function Order() {
       </div>
 
       <ul className="border-t border-b divide-y divide-stone-200">
-        {cart.map(item=><OrderItem item={item} key={item.id} />)}
+        {cart.map(item=><OrderItem item={item} key={item.pizzaId} />)}
       </ul>
 
 
